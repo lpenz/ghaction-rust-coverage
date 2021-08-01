@@ -1,0 +1,9 @@
+---
+name: rust-source-coverage
+description: Docker github action to run source-based coverage on a rust project
+branding:
+  icon: play-circle
+  color: black
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
