@@ -11,6 +11,7 @@ export CARGO_INCREMENTAL='0'
 export RUSTFLAGS='-Zinstrument-coverage -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests'
 export RUSTDOCFLAGS='-Zinstrument-coverage -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests -Z unstable-options --persist-doctests target/debug/doctestbins'
 export LLVM_PROFILE_FILE="coverage-%p-%m.profraw"
+export RUST_BACKTRACE=1
 
 cargo test --all-features --no-fail-fast
 
