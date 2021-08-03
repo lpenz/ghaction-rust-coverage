@@ -4,6 +4,10 @@ description: Docker github action that runs cargo test while gathering source-ba
 branding:
   icon: play-circle
   color: black
+inputs:
+  dependencies_debian:
+    description: 'Dependencies as Debian packages to install; used if defined'
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'

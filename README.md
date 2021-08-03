@@ -40,7 +40,11 @@ jobs:
 ```
 
 
-## Alternative actions
+### Inputs
+
+- `dependencies_debian`: Debian packages to install before running the tests.
+
+## Alternatives
 
 - [rust-tarpaulin](https://github.com/marketplace/actions/rust-tarpaulin)
 - [rust-grcov](https://github.com/marketplace/actions/rust-grcov)

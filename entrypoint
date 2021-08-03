@@ -3,9 +3,21 @@
 # This file is subject to the terms and conditions defined in
 # file 'LICENSE', which is part of this source code package.
 
+if [ -n "$INPUT_DEPENDENCIES_DEBIAN" ]; then
+    function install_dependencies {
+        su - -c "apt-get update && apt-get install --no-install-recommends -y $INPUT_DEPENDENCIES_DEBIAN"
+    }
+else
+    function install_dependencies {
+        : no Debian packages to install
+    }
+fi
+
 OUTPUT_PATH=lcov.info
 
 set -e -x
+
+install_dependencies
 
 export CARGO_INCREMENTAL='0'
 export RUSTFLAGS='-Zinstrument-coverage -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests'
