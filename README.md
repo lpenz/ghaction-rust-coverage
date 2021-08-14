@@ -28,7 +28,6 @@ name: CI
 on: [ push, pull_request ]
 jobs:
   test-coverage:
-    name: cargo test with coveralls
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -43,6 +42,12 @@ jobs:
 ### Inputs
 
 - `dependencies_debian`: Debian packages to install before running the tests.
+- `output_type`: output type to pass to grcov.
+- `output_path`: output path to pass to grcov.
+
+
+If neither `output_type` and `output_path` are defined, the action by
+default creates an lcov.info file in the current directory.
 
 ## Alternatives
 

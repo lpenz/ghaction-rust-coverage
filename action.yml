@@ -6,8 +6,17 @@ branding:
   color: black
 inputs:
   dependencies_debian:
-    description: 'Dependencies as Debian packages to install; used if defined'
+    description: Dependencies as Debian packages to install; used if defined
     default: ''
+  output_type:
+    description: Output type to pass to grcov
+    default: ''
+  output_path:
+    description: Output path to pass to grcov and set as report variable
+    default: ''
+outputs:
+  report:
+    description: Name of report file, for compatibility with rust-grcov
 runs:
   using: 'docker'
   image: 'Dockerfile'
