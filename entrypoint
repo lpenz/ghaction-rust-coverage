@@ -13,40 +13,43 @@ else
     }
 fi
 
-GRCOV=( grcov . \
-              -s . \
-              --binary-path ./target/debug/ \
-              --ignore "/*" --ignore "../*" \
-              --branch --ignore-not-existing \
-      )
+ARGS=()
 
 if [ -n "$INPUT_OUTPUT_TYPE" ]; then
-    GRCOV+=( -t "$INPUT_OUTPUT_TYPE" )
+    ARGS+=( "--$INPUT_OUTPUT_TYPE" )
 fi
 
 if [ -n "$INPUT_OUTPUT_PATH" ]; then
-    GRCOV+=( -o "$INPUT_OUTPUT_PATH" )
     OUTPUT_PATH="$INPUT_OUTPUT_PATH"
+    ARGS+=( --output-path "$OUTPUT_PATH" )
 elif [ -z "$INPUT_OUTPUT_TYPE" ]; then
     # Default if no output_type was specified either
-    GRCOV+=( -o lcov.info )
     OUTPUT_PATH="lcov.info"
+    ARGS+=( --lcov --output-path "$OUTPUT_PATH" )
 fi
+
+export RUSTC_BOOTSTRAP
+export CARGO_INCREMENTAL
+export RUSTFLAGS
+export RUSTDOCFLAGS
+export RUST_BACKTRACE
 
 set -e -x
 
 install_dependencies
 
-export RUSTC_BOOTSTRAP='1' # enable -Z flags in stable
-export CARGO_INCREMENTAL='0'
-export RUSTFLAGS='-Zinstrument-coverage -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests'
-export RUSTDOCFLAGS='-Zinstrument-coverage -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests -Z unstable-options --persist-doctests target/debug/doctestbins'
-export LLVM_PROFILE_FILE="coverage-%p-%m.profraw"
-export RUST_BACKTRACE=1
+RUSTC_BOOTSTRAP='1' # enable -Z flags in stable
+CARGO_INCREMENTAL='0'
+RUSTFLAGS='-Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests'
+RUSTDOCFLAGS="$RUSTFLAGS"
+RUST_BACKTRACE=1
 
-cargo test --all-features --no-fail-fast
+cargo llvm-cov --workspace clean
+cargo llvm-cov --workspace --all-features --no-fail-fast --no-report
+cargo llvm-cov --workspace --all-features --no-fail-fast --no-report --doc
+cargo llvm-cov --no-run --doctests "${ARGS[@]}"
+cargo llvm-cov --no-run --doctests
 
-"${GRCOV[@]}"
 if [ -n "$OUTPUT_PATH" ]; then
     echo "::set-output name=report::$OUTPUT_PATH"
 fi

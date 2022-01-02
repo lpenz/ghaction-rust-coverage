@@ -5,7 +5,7 @@
 FROM rust:slim
 RUN set -e -x; \
     rustup component add llvm-tools-preview; \
-    cargo install grcov
+    cargo install cargo-llvm-cov
 
 COPY entrypoint /
 CMD ["/entrypoint"]
