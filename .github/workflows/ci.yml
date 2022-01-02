@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           path: ./ghaction-rust-coverage
+      - run: docker pull rust:slim
       - uses: ./ghaction-rust-coverage
       - run: grep '^SF:' lcov.info
   dockerhub:

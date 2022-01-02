@@ -37,6 +37,7 @@ set -e -x
 
 install_dependencies
 
+export RUSTC_BOOTSTRAP='1' # enable -Z flags in stable
 export CARGO_INCREMENTAL='0'
 export RUSTFLAGS='-Zinstrument-coverage -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests'
 export RUSTDOCFLAGS='-Zinstrument-coverage -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests -Z unstable-options --persist-doctests target/debug/doctestbins'
