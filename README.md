@@ -42,15 +42,21 @@ jobs:
 ### Inputs
 
 - `dependencies_debian`: Debian packages to install before running the tests.
-- `output_type`: output type to pass to grcov.
-- `output_path`: output path to pass to grcov.
+- `output_type`: output type, one of `html`, `text`, `json` or `lcov`.
+- `output_path`: output path.
 
 
 If neither `output_type` and `output_path` are defined, the action by
 default creates an lcov.info file in the current directory.
 
+We are currently using
+[cargo-llvm-cov](https://crates.io/crates/cargo-llvm-cov) internally,
+more information about the arguments [here](https://crates.io/crates/cargo-llvm-cov).
+
 ## Alternatives
 
+- [cargo-llvm-cov](https://crates.io/crates/cargo-llvm-cov) is what we
+  use internally.
 - [rust-tarpaulin](https://github.com/marketplace/actions/rust-tarpaulin)
 - [rust-grcov](https://github.com/marketplace/actions/rust-grcov)
 - [grcov-express](https://github.com/marketplace/actions/grcov-express):
