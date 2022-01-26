@@ -14,6 +14,8 @@ inputs:
   output_path:
     description: Output path to pass to grcov and set as report variable
     default: ''
+  test_args:
+    description: Arguments to pass to the test
 outputs:
   report:
     description: Name of report file, for compatibility with rust-grcov

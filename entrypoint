@@ -13,19 +13,25 @@ else
     }
 fi
 
-ARGS=()
+TEST_ARGS=()
+if [ -n "$INPUT_TEST_ARGS" ]; then
+    IFS=' ' read -r -a testargs <<< "$INPUT_TEST_ARGS"
+    TEST_ARGS+=( "${testargs[@]}" )
+fi
+
+OUTPUT_ARGS=()
 
 if [ -n "$INPUT_OUTPUT_TYPE" ]; then
-    ARGS+=( "--$INPUT_OUTPUT_TYPE" )
+    OUTPUT_ARGS+=( "--$INPUT_OUTPUT_TYPE" )
 fi
 
 if [ -n "$INPUT_OUTPUT_PATH" ]; then
     OUTPUT_PATH="$INPUT_OUTPUT_PATH"
-    ARGS+=( --output-path "$OUTPUT_PATH" )
+    OUTPUT_ARGS+=( --output-path "$OUTPUT_PATH" )
 elif [ -z "$INPUT_OUTPUT_TYPE" ]; then
     # Default if no output_type was specified either
     OUTPUT_PATH="lcov.info"
-    ARGS+=( --lcov --output-path "$OUTPUT_PATH" )
+    OUTPUT_ARGS+=( --lcov --output-path "$OUTPUT_PATH" )
 fi
 
 export RUSTC_BOOTSTRAP
@@ -45,9 +51,9 @@ RUSTDOCFLAGS="$RUSTFLAGS"
 RUST_BACKTRACE=1
 
 cargo llvm-cov --workspace clean
-cargo llvm-cov --workspace --all-features --no-fail-fast --no-report
-cargo llvm-cov --workspace --all-features --no-fail-fast --no-report --doc
-cargo llvm-cov --no-run --doctests "${ARGS[@]}"
+cargo llvm-cov --workspace --all-features --no-fail-fast --no-report -- "${TEST_ARGS[@]}"
+cargo llvm-cov --workspace --all-features --no-fail-fast --no-report --doc -- "${TEST_ARGS[@]}"
+cargo llvm-cov --no-run --doctests "${OUTPUT_ARGS[@]}"
 cargo llvm-cov --no-run --doctests
 
 if [ -n "$OUTPUT_PATH" ]; then
