@@ -45,6 +45,7 @@ jobs:
 - `output_type`: output type, one of `html`, `text`, `json` or `lcov`.
 - `output_path`: output path.
 - `test_args`: arguments to pass to the test - `--nocapture` for example.
+- `doctest`: if `true` (the default) the documentation tests are also run.
 
 
 If neither `output_type` and `output_path` are defined, the action by
