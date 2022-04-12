@@ -18,6 +18,7 @@ RUN set -eux; \
         libc6-dev \
         wget \
         ; \
+    sed -i '/pam_rootok.so$/aauth sufficient pam_permit.so' /etc/pam.d/su; \
     wget https://sh.rustup.rs -O rustup-init; \
     bash rustup-init -y --no-modify-path --profile minimal --default-toolchain nightly-2022-01-14; \
     rm rustup-init; \

@@ -52,7 +52,7 @@ RUSTFLAGS='-Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-ch
 RUSTDOCFLAGS="$RUSTFLAGS"
 RUST_BACKTRACE=1
 
-cargo llvm-cov --workspace clean
+su -p -c "cargo llvm-cov --workspace clean"
 
 # Run regular test:
 cargo llvm-cov --workspace --all-features --no-fail-fast --no-report -- "${TEST_ARGS[@]}"
