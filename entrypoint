@@ -25,7 +25,15 @@ if [ -n "$INPUT_OUTPUT_TYPE" ]; then
     OUTPUT_ARGS+=("--$INPUT_OUTPUT_TYPE")
 fi
 
-DOCTEST="${INPUT_DOCTEST:-true}"
+if [ -n "$INPUT_DOCTEST" ]; then
+    DOCTEST="$INPUT_DOCTEST"
+else
+    if grep -q '^doctest\s\+=\s\+false' Cargo.toml; then
+        DOCTEST=false
+    else
+        DOCTEST=true
+    fi
+fi
 
 if [ -n "$INPUT_OUTPUT_PATH" ]; then
     OUTPUT_PATH="$INPUT_OUTPUT_PATH"
@@ -58,6 +66,8 @@ cargo llvm-cov --workspace --all-features --no-fail-fast --no-report -- "${TEST_
 if [ "$DOCTEST" = "true" ]; then
     # Run doc tests:
     cargo llvm-cov --workspace --all-features --no-fail-fast --no-report --doc -- "${TEST_ARGS[@]}"
+else
+    : skipping coverage of doc tests
 fi
 # Generate report including doc tests:
 cargo llvm-cov --no-run --doctests "${OUTPUT_ARGS[@]}"
