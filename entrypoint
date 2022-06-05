@@ -46,7 +46,6 @@ set -e -x
 
 install_dependencies
 
-RUSTC_BOOTSTRAP='1' # enable -Z flags in stable
 CARGO_INCREMENTAL='0'
 RUSTFLAGS='-Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests'
 RUSTDOCFLAGS="$RUSTFLAGS"
