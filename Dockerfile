@@ -17,6 +17,7 @@ RUN set -eux; \
         gcc \
         libc6-dev \
         wget \
+        pkg-config \
         ; \
     sed -i '/pam_rootok.so$/aauth sufficient pam_permit.so' /etc/pam.d/su; \
     wget https://sh.rustup.rs -O rustup-init; \
