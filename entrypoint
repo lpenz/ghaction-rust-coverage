@@ -79,3 +79,7 @@ sed -i "s@$GITHUB_WORKSPACE/@@" "$OUTPUT_PATH"
 if [ -n "$OUTPUT_PATH" ]; then
     echo "::set-output name=report::$OUTPUT_PATH"
 fi
+
+if [ -n "$RUNNER_DEBUG" ]; then
+    cat "$OUTPUT_PATH"
+fi
