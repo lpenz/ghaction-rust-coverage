@@ -74,6 +74,8 @@ cargo llvm-cov --no-run --doctests "${OUTPUT_ARGS[@]}"
 # Print summary including doc tests:
 cargo llvm-cov --no-run --doctests
 
+sed -i "s@$GITHUB_WORKSPACE/@@" "$OUTPUT_PATH"
+
 if [ -n "$OUTPUT_PATH" ]; then
     echo "::set-output name=report::$OUTPUT_PATH"
 fi
