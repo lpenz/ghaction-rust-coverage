@@ -16,6 +16,7 @@ RUN set -eux; \
         ca-certificates \
         gcc \
         libc6-dev \
+        libssl-dev \
         wget \
         pkg-config \
         ; \
