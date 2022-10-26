@@ -77,7 +77,7 @@ cargo llvm-cov --no-run --doctests
 if [ -n "$OUTPUT_PATH" ]; then
     sed -i "s@$GITHUB_WORKSPACE/@@" "$OUTPUT_PATH"
 
-    echo "::set-output name=report::$OUTPUT_PATH"
+    echo "report=${OUTPUT_PATH}" > "$GITHUB_OUTPUT"
 
     if [ -n "$RUNNER_DEBUG" ]; then
         cat "$OUTPUT_PATH"
