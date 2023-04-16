@@ -34,7 +34,9 @@ RUN set -eux; \
         ; \
     rm -rf /var/lib/apt/lists/*; \
     rustup component add llvm-tools-preview; \
-    cargo install cargo-llvm-cov
+    cargo install cargo-llvm-cov; \
+    cargo install cargo-hack; \
+    true
 
 COPY entrypoint /
 CMD ["/entrypoint"]
