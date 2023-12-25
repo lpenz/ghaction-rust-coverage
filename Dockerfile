@@ -5,7 +5,7 @@
 # Adapted from https://github.com/rust-lang/docker-rust/blob/master/Dockerfile-slim.template
 # Nightly version from https://rust-lang.github.io/rustup-components-history/
 
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
