@@ -24,7 +24,7 @@ RUN set -eux; \
         ; \
     sed -i '/pam_rootok.so$/aauth sufficient pam_permit.so' /etc/pam.d/su; \
     wget https://sh.rustup.rs -O rustup-init; \
-    bash rustup-init -y --no-modify-path --profile minimal --default-toolchain nightly-2023-10-19; \
+    bash rustup-init -y --no-modify-path --profile minimal --default-toolchain nightly-2023-12-19; \
     rm rustup-init; \
     chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
     rustup --version; \
