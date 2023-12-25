@@ -42,6 +42,7 @@ jobs:
 ### Inputs
 
 - `dependencies_debian`: Debian packages to install before running the tests.
+- `working_directory`: `cd` to this directory before running the action.
 - `output_type`: output type, one of `html`, `text`, `json` or `lcov`.
 - `output_path`: output path.
 - `test_args`: arguments to pass to the test - `--nocapture` for example.

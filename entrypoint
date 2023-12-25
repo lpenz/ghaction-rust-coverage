@@ -52,6 +52,10 @@ export RUST_BACKTRACE
 
 set -e -x
 
+if [ -n "$INPUT_WORKING_DIRECTORY" ]; then
+    cd "$INPUT_WORKING_DIRECTORY"
+fi
+
 install_dependencies
 
 CARGO_INCREMENTAL='0'

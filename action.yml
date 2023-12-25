@@ -5,6 +5,9 @@ branding:
   icon: play-circle
   color: black
 inputs:
+  working_directory:
+    description: Go to this directory before running the action
+    default: ''
   dependencies_debian:
     description: Dependencies as Debian packages to install; used if defined
     default: ''

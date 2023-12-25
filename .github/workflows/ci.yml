@@ -19,6 +19,20 @@ jobs:
       - run: docker pull rust:slim
       - uses: ./ghaction-rust-coverage
       - run: grep '^SF:' lcov.info
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.5.3
+        with:
+          path: ghaction-rust-coverage
+      - uses: actions/checkout@v3.5.3
+        with:
+          repository: lpenz/ogle
+          path: ogle
+          fetch-depth: 0
+      - uses: ./ghaction-rust-coverage
+        with:
+          working_directory: ogle
   publish-dockerhub:
     needs: [ omnilint, docker-build ]
     runs-on: ubuntu-latest
