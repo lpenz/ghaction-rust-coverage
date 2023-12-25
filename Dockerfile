@@ -20,6 +20,7 @@ RUN set -eux; \
         libssl-dev \
         wget \
         pkg-config \
+        libclang-dev \
         ; \
     sed -i '/pam_rootok.so$/aauth sufficient pam_permit.so' /etc/pam.d/su; \
     wget https://sh.rustup.rs -O rustup-init; \
