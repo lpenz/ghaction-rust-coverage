@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: docker://lpenz/ghaction-rust-coverage:0.14.0
+      - uses: docker://lpenz/ghaction-rust-coverage:0.15.0
       - uses: coverallsapp/github-action@v1.1.2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
