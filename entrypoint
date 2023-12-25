@@ -61,7 +61,7 @@ RUST_BACKTRACE=1
 
 su -p -c "cargo llvm-cov --workspace clean"
 
-# Run regular test:
+: Run regular test:
 cargo llvm-cov --workspace --all-features --no-fail-fast --no-report -- "${TEST_ARGS[@]}"
 if [ "$DOCTEST" = "true" ]; then
     # Run doc tests:
@@ -69,15 +69,15 @@ if [ "$DOCTEST" = "true" ]; then
 else
     : skipping coverage of doc tests
 fi
-# Generate report including doc tests:
+: Generate report including doc tests:
 cargo llvm-cov --no-run --doctests "${OUTPUT_ARGS[@]}"
-# Print summary including doc tests:
+: Print summary including doc tests:
 cargo llvm-cov --no-run --doctests
 
 if [ -n "$OUTPUT_PATH" ]; then
     sed -i "s@$GITHUB_WORKSPACE/@@" "$OUTPUT_PATH"
 
-    echo "report=${OUTPUT_PATH}" > "$GITHUB_OUTPUT"
+    echo "report=${OUTPUT_PATH}" >"$GITHUB_OUTPUT"
 
     if [ -n "$RUNNER_DEBUG" ]; then
         cat "$OUTPUT_PATH"
